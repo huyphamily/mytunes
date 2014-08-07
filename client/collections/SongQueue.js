@@ -6,16 +6,23 @@ var SongQueue = Songs.extend({
   //listen for enqueue or dequeue events
     //add or remove songs based on event
     this.on("add", function(){
-      this.at(0).play();
+      if(this.length === 1){
+       this.playFirst();
+      }
     }, this);
 
     this.on("ended", function(){
-      this.shift();
-      this.at(0).play();
+      this.remove(this.at(0));
+      if(this.length !== 0){
+        this.playFirst();
+      }
     }, this);
+
 
   },
 
-
+  playFirst: function(){
+      this.at(0).play();
+  }
 
 });

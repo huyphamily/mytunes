@@ -16,7 +16,7 @@ var SongModel = Backbone.Model.extend({
     this.trigger('dequeue', this);
   },
 
-  // when song ended...call dequeue
+  // when song ended...play next song
   ended: function(){
     this.trigger('ended', this);
   }

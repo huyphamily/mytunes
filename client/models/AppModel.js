@@ -6,8 +6,8 @@ var AppModel = Backbone.Model.extend({
     //set variable mediaPlayer to have access to it for ending
     
 
-    this.set('currentSong', new SongModel()); //setting 'current song' to be a new model, which has play,queue, etc
-    this.set('songQueue', new SongQueue()); //creating a new 'playlist'
+    this.set('currentSong', new SongModel());
+    this.set('songQueue', new SongQueue());
 
     params.library.on('play', function(song){
       this.set('currentSong', song);
@@ -17,8 +17,8 @@ var AppModel = Backbone.Model.extend({
       this.get('songQueue').add(song);
     }, this);
 
-    params.library.on('dequeue', function(song){
-      this.get('songQueue').remove(song);
+    this.get('songQueue').on('stop', function(){
+      this.set('currentSong', null);
     }, this);
 
   }
